@@ -4,7 +4,7 @@ from neo4j import GraphDatabase
 from faker import Faker
 import hashlib
 import random
-from datetime import datetime, timedelta
+from datetime import datetime 
 
 # Initialize Faker to generate realistic data
 fake = Faker()
@@ -110,12 +110,7 @@ def generate_user_data(user_id):
     # Basic user info
     first_name = fake.first_name()
     last_name = fake.last_name()
-    name = f"{first_name} {last_name}"
     username = f"{first_name.lower()}{last_name.lower()}{user_id}"[:20]
-    
-    # Generate dates with sensible ranges
-    registration_date = fake.date_time_between(start_date='-5y', end_date='now').isoformat()
-    birth_date = fake.date_of_birth(minimum_age=18, maximum_age=80).isoformat()
     
     # Extended profile data
     return {
