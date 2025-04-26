@@ -12,15 +12,17 @@
 
 
 ## Folder Structure
+```
 SocialNetwork/
 ├── db/
-│   ├── __init__.py              # (keeps the folder as a package)
-│   ├── connection.py            # (Neo4j connection setup only)
-│   ├── user_management.py       # (register, login, view profile, edit profile)
-│   └── social_graph.py          # (follow, unfollow, recommendations, mutual connections)
-├── main.py
-├── register.py
-├── login.py
-├── post_login.py
+│   ├── __init__.py             # Makes 'db' a Python package
+│   ├── connection.py           # Handles Neo4j database connection
+│   ├── user_management.py      # User operations: Register, Login, View Profile, Edit Profile
+│   └── social_graph.py         # Social features: Follow, Unfollow, Friend Recommendations, Mutual Connections
+├── main.py                     # Main entry point: User chooses to Register or Login
+├── register.py                  # Handles the user registration flow
+├── login.py                     # Handles the user login flow
+├── post_login.py                # Post-login menu: View Profile, Friend Recommendations, Logout
+```
 
 
