@@ -6,8 +6,9 @@ def post_login_menu(user_mgmt, social_graph, username):
         print("12. Logout")
 
         choice = input("Enter option: ")
-
-        if choice == "9":
+        if choice == "3":
+            user_mgmt.get_user_info(username)
+        elif choice == "9":
             social_graph.friend_recommendations(username)
         elif choice == "12":
             print("Logging out... 👋")

@@ -7,7 +7,7 @@ from login import login_flow
 # Set your credentials
 uri = "bolt://localhost:7687"
 user = "neo4j"
-password = "PATELgowda9.8"
+password = "secretgraph"
 
 connection = Neo4jConnection(uri, user, password)
 connection.test_connection()
