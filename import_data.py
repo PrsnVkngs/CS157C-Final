@@ -2,9 +2,9 @@ import pandas as pd
 import os
 from neo4j import GraphDatabase
 from faker import Faker
+import hashlib
 import random
 from datetime import datetime 
-import bcrypt
 
 # Initialize Faker to generate realistic data
 fake = Faker()
@@ -113,17 +113,13 @@ def generate_user_data(user_id):
     username = f"{first_name.lower()}{last_name.lower()}{user_id}"[:20]
     
     # Extended profile data
-    # Generate a hashed password using bcrypt
-    password = f"password{user_id}".encode()
-    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt()).decode()
-
     return {
         "userId": str(user_id),
         "firstName": first_name,
         "lastName": last_name,
         "username": username,
         "email": f"{username}@{fake.free_email_domain()}",
-        "password": hashed_password,
+        "password": hashlib.sha256(f"password{user_id}".encode()).hexdigest(),
         "bio": fake.paragraph(nb_sentences=3),
         "location": fake.city(),
         "country": fake.country(),
