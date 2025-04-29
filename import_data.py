@@ -2,9 +2,9 @@ import pandas as pd
 import os
 from neo4j import GraphDatabase
 from faker import Faker
-import hashlib
 import random
 from datetime import datetime 
+import bcrypt
 
 # Initialize Faker to generate realistic data
 fake = Faker()
@@ -15,7 +15,7 @@ NEO4J_USER = "neo4j"
 NEO4J_PASSWORD = "secretgraph"
 
 # Path to the SNAP ego-Facebook dataset
-dataset_path = "./data"
+dataset_path = "."
 
 class Neo4jImporter:
     def __init__(self, uri, user, password):
@@ -113,13 +113,17 @@ def generate_user_data(user_id):
     username = f"{first_name.lower()}{last_name.lower()}{user_id}"[:20]
     
     # Extended profile data
+    # Generate a hashed password using bcrypt
+    password = f"password{user_id}".encode()
+    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt()).decode()
+
     return {
         "userId": str(user_id),
         "firstName": first_name,
         "lastName": last_name,
         "username": username,
         "email": f"{username}@{fake.free_email_domain()}",
-        "password": hashlib.sha256(f"password{user_id}".encode()).hexdigest(),
+        "password": hashed_password,
         "bio": fake.paragraph(nb_sentences=3),
         "location": fake.city(),
         "country": fake.country(),
