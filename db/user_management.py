@@ -33,27 +33,3 @@ class UserManagement:
             else:
                 print("Username not found.")
                 return False
-    
-    def get_user_info(self, username):
-        with self.connection.driver.session() as session:
-            result = session.run("""
-            MATCH (u:User {username: $username})
-            RETURN u.userId AS userId, u.firstName AS firstName, u.lastName AS lastName, 
-                   u.username AS username, u.email AS email, u.bio AS bio,
-                   u.location AS location, u.country AS country
-            """, username=username)
-            record = result.single()
-
-            if record:
-                print(f"User Info:")
-                print(f"User ID: {record['userId']}")
-                print(f"Name: {record['firstName']} {record['lastName']}")
-                print(f"Username: {record['username']}")
-                print(f"Email: {record['email']}")
-                print(f"Bio: {record['bio']}")
-                print(f"Location: {record['location']}")
-                print(f"Country: {record['country']}")
-                return record
-            else:
-                print("User not found.")
-                return None
