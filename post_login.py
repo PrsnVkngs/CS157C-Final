@@ -16,7 +16,7 @@ def post_login_menu(user_mgmt, social_graph, username):
             case 9:
                 social_graph.friend_recommendations(username)
             case 12:
-                print("Logging out... 👋")
+                print("Logging out...")
                 break
 
             case _:
