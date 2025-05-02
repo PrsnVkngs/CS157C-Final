@@ -13,9 +13,9 @@ def post_login_menu(user_mgmt, social_graph, username):
         match choice:
             case "4":
                 pass
-            case 9:
+            case "9":
                 social_graph.friend_recommendations(username)
-            case 12:
+            case "12":
                 print("Logging out...")
                 break
 
