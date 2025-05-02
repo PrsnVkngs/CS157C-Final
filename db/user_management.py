@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import hashlib
-=======
-import bcrypt
 from datetime import datetime, timedelta
->>>>>>> 47b75e25f5772547d2b7aa6e60afa95885aa6325
 
 class UserManagement:
     def __init__(self, connection):
@@ -29,19 +25,14 @@ class UserManagement:
 
             if record:
                 stored_hashed = record["hashed_password"]
-<<<<<<< HEAD
                 sha256_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
                 if sha256_hash == stored_hashed:
-=======
-                if bcrypt.checkpw(password.encode('utf-8'), stored_hashed.encode('utf-8')):
                     # update the last-login time for the user.
                     current_time = datetime.now().isoformat()
                     session.run("""
                     MATCH (u:User {username: $username})
                     SET u.last_login = $last_login
                     """, username=username, last_login=current_time)
-
->>>>>>> 47b75e25f5772547d2b7aa6e60afa95885aa6325
                     print(f"Login successful! Welcome, {username}!")
                     return True
                 else:
