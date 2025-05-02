@@ -10,7 +10,7 @@ def post_login_menu(user_mgmt, social_graph, username):
         if choice == "9":
             social_graph.friend_recommendations(username)
         elif choice == "12":
-            print("Logging out... 👋")
+            print("Logging out...")
             break
         else:
             print("Invalid choice. Please try again.")
