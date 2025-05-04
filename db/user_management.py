@@ -56,5 +56,3 @@ class UserManagement:
                 last_login = datetime.fromisoformat(record["last_login"])
                 return datetime.now() - last_login <= self.session_length
             return False
-
-
