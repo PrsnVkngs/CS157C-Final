@@ -68,7 +68,7 @@ class SocialGraph:
                 MATCH (me:User {username: $username})-[:FOLLOWS]->(friend:User)-[:FOLLOWS]->(rec:User)
                 WHERE NOT (me)-[:FOLLOWS]->(rec) AND me <> rec
                 RETURN DISTINCT rec.username AS recommended_user
-                LIMIT 5
+                LIMIT 10
             """, username=username)
 
             print("\n--- Friend Recommendations ---")

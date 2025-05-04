@@ -3,6 +3,7 @@ def post_login_menu(user_mgmt, social_graph, username):
         print(f"\nWelcome back, {username}!")
         #we can add all the remaining usecases here, like view profile, edit profile etc.
         print("3. View Profile")
+        print("4. Edit Profile")
         print("7. View Followers/Following")
         print("8. Find Mutual Connections")
         print("9. Friend Recommendations")
@@ -28,3 +29,16 @@ def post_login_menu(user_mgmt, social_graph, username):
             break
         else:
             print("Invalid choice. Please try again.")
+
+        # refactored to use a match case block, as it is more efficient.
+        match choice:
+            case "4":
+                pass
+            case "9":
+                social_graph.friend_recommendations(username)
+            case "12":
+                print("Logging out...")
+                break
+
+            case _:
+                print("Invalid choice. Please try again.")

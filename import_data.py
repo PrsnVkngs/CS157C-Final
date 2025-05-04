@@ -15,7 +15,7 @@ NEO4J_USER = "neo4j"
 NEO4J_PASSWORD = "secretgraph"
 
 # Path to the SNAP ego-Facebook dataset
-dataset_path = "."
+dataset_path = "./data"
 
 class Neo4jImporter:
     def __init__(self, uri, user, password):

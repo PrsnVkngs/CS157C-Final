@@ -8,3 +8,5 @@ def login_flow(user_mgmt, social_graph):
     success = user_mgmt.login_user(username, password)
     if success:
         post_login_menu(user_mgmt, social_graph, username)
+    else:
+        print("Incorrect credentials")
