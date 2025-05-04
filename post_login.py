@@ -22,7 +22,7 @@ def post_login_menu(user_mgmt, social_graph, username):
             case "3":
                 social_graph.get_user_info(username)
             case "4":
-                social_graph.edit_user_info(username)
+                social_graph.set_user_info(username)
             case "5":
                 followee = input("Enter the username of the user you want to follow: ")
                 social_graph.follow_user(username, followee)
@@ -41,7 +41,7 @@ def post_login_menu(user_mgmt, social_graph, username):
                 search_term = input("Enter name or username to search: ")
                 social_graph.search_users(search_term)
             case "11":
-                social_graph.get_most_popular_users()
+                social_graph.most_popular_users()
             case "12":
                 print("Logging out... 👋")
                 break

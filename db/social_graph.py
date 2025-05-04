@@ -138,18 +138,20 @@ class SocialGraph:
             MATCH (u:User {username: $username})
             MATCH (f:User {username: $followee_username})
             OPTIONAL MATCH (u)-[r:FOLLOWS]->(f)
+            WITH u, f, r
+            WHERE r IS NOT NULL
             DELETE r
+            RETURN count(r) as deletedCount
             """, username=username, followee_username=followee_username)
             record = result.single()
-            
-            if record:
-                print(f"{username} unfollowed {followee_username}.")
-                return record
-            else:
-                print(f"Failed to unfollow {followee_username}.")
-                return None
 
-    
+            if record and record['deletedCount'] > 0:
+                print(f"{username} unfollowed {followee_username}.")
+                return True
+            else:
+                print(f"Failed to unfollow {followee_username}. Relationship may not exist.")
+                return False
+
     def get_user_followers(self, username):
         with self.connection.driver.session() as session:
             result = session.run("""
@@ -266,8 +268,7 @@ class SocialGraph:
                 WITH user, count(follower) as followerCount
                 ORDER BY followerCount DESC
                 LIMIT 10
-                RETURN user.firstName AS firstName, 
-                       user.lastName AS lastName,
+                RETURN user.name AS name,
                        user.username AS username,
                        followerCount
             """)
@@ -277,9 +278,10 @@ class SocialGraph:
             print("\n--- Top 10 Most Popular Users ---")
             if users:
                 for i, user in enumerate(users, 1):
-                    print(f"{i}. {user['firstName']} {user['lastName']} (@{user['username']})")
+                    print(f"{i}. {user['name']} (@{user['username']})")
                     print(f"   Followers: {user['followerCount']}")
                 return users
             else:
                 print("No users found.")
                 return []
+
